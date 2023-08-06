@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>821910135791-nhddsqjedm99qd373mbb3tkifptlssm1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.821910135791-nhddsqjedm99qd373mbb3tkifptlssm1</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC0_UROa3f8yJBD7nIPGRTp9GylAOqIXE0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>821910135791</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>orgIdentifier.iosApp</string>
+	<key>PROJECT_ID</key>
+	<string>clubreservationcalendar</string>
+	<key>STORAGE_BUCKET</key>
+	<string>clubreservationcalendar.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:821910135791:ios:87aa53e6f954ecd315cc1a</string>
+</dict>
+</plist>
