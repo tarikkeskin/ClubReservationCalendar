@@ -50,6 +50,23 @@ kotlin {
 
                 //Log Napier
                 api("io.github.aakira:napier:2.6.1")
+
+                val voyagerVersion = "1.0.0-rc06"
+
+                // Multiplatform
+                // Navigator
+                implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
+
+                // BottomSheetNavigator
+                implementation("cafe.adriel.voyager:voyager-bottom-sheet-navigator:$voyagerVersion")
+
+                // TabNavigator
+                implementation("cafe.adriel.voyager:voyager-tab-navigator:$voyagerVersion")
+
+                // Transitions
+                implementation("cafe.adriel.voyager:voyager-transitions:$voyagerVersion")
+
+
             }
         }
         val commonTest by getting {
@@ -64,6 +81,7 @@ kotlin {
                 implementation("com.squareup.sqldelight:android-driver:1.5.5")
                 implementation("androidx.appcompat:appcompat:1.6.1")
                 implementation("androidx.activity:activity-compose:1.7.2")
+                implementation("androidx.navigation:navigation-compose:2.5.3")
             }
         }
         val androidUnitTest by getting
@@ -92,7 +110,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.plcoding.contactscomposemultiplatform"
+    namespace = "com.example.clubreservationcalendar"
     compileSdk = 33
     defaultConfig {
         minSdk = 26
@@ -105,7 +123,7 @@ android {
 
 sqldelight {
     database("ContactDatabase") {
-        packageName = "com.plcoding.contactscomposemultiplatform.database"
+        packageName = "com.example.clubreservationcalendar.database"
         sourceFolders = listOf("sqldelight")
     }
 }
@@ -121,5 +139,6 @@ dependencies {
     commonMainImplementation("io.github.epicarchitect:calendar-compose-ranges:1.0.4") // includes basis
     commonMainImplementation("io.github.epicarchitect:calendar-compose-pager:1.0.4") // includes basis
     commonMainImplementation("io.github.epicarchitect:calendar-compose-datepicker:1.0.4") // includes pager + ranges
+
 }
 
