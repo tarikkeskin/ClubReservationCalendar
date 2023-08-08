@@ -7,6 +7,7 @@ import com.example.clubreservationcalendar.contacts.domain.Contact
 import com.example.clubreservationcalendar.contacts.domain.ContactDataSource
 import com.example.clubreservationcalendar.contacts.domain.ContactValidator
 import com.example.clubreservationcalendar.core.api.AuthRepository
+import com.example.clubreservationcalendar.core.api.ReservationRepository
 import com.example.clubreservationcalendar.core.api.Resource
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import kotlinx.coroutines.delay
@@ -19,7 +20,8 @@ import kotlinx.coroutines.launch
 
 class ContactListViewModel(
     private val contactDataSource: ContactDataSource,
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val reservationRepository: ReservationRepository
 ): ViewModel() {
 
     private val _state = MutableStateFlow(ContactListState())
@@ -131,6 +133,7 @@ class ContactListViewModel(
 
                         viewModelScope.launch {
                             //contactDataSource.insertContact(contact)
+
                             when(val resource = authRepository.signIn(contact.email,contact.firstName)){
                                 is Resource.Success -> {
                                     _state.update {

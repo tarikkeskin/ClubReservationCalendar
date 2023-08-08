@@ -3,6 +3,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.compose")
     id("com.squareup.sqldelight")
+    kotlin("plugin.serialization")
 }
 
 kotlin {
@@ -34,6 +35,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                val voyagerVersion = "1.0.0-rc06"
+                val ktorVersion = "2.2.4"
+
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material3)
@@ -51,8 +55,6 @@ kotlin {
                 //Log Napier
                 api("io.github.aakira:napier:2.6.1")
 
-                val voyagerVersion = "1.0.0-rc06"
-
                 // Multiplatform
                 // Navigator
                 implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
@@ -65,6 +67,11 @@ kotlin {
 
                 // Transitions
                 implementation("cafe.adriel.voyager:voyager-transitions:$voyagerVersion")
+
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
 
 
             }

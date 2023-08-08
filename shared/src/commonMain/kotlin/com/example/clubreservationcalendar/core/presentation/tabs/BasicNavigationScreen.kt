@@ -17,10 +17,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
+import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.uniqueScreenKey
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.clubreservationcalendar.core.api.AuthRepository
+import com.example.clubreservationcalendar.core.api.ReservationRepository
+import com.example.clubreservationcalendar.ui.models.HomeScreenModel
 import io.github.aakira.napier.Napier
 
 data class BasicNavigationScreen(
@@ -32,6 +36,16 @@ data class BasicNavigationScreen(
 
     @Composable
     override fun Content() {
+
+        // Insert repository
+        val screenModel = rememberScreenModel() {
+            HomeScreenModel(
+                authRepository = AuthRepository(),
+                reservationRepository = ReservationRepository()
+            )
+        }
+
+
         LifecycleEffect(
             onStarted = { Napier.d("Navigator", tag = "Start screen #$index") },
             onDisposed = { Napier.d("Navigator", tag = "Dispose screen #$index") },
@@ -68,7 +82,10 @@ data class BasicNavigationScreen(
                 Spacer(modifier = Modifier.weight(.1f))
 
                 Button(
-                    onClick = { navigator.push(BasicNavigationScreen(index.inc(), wrapContent)) },
+                    //onClick = { navigator.push(BasicNavigationScreen(index.inc(), wrapContent)) },
+                    onClick = {
+                            screenModel.addReservation("firstComment")
+                    },
                     modifier = Modifier.weight(.5f)
                 ) {
                     Text(text = "Push")
