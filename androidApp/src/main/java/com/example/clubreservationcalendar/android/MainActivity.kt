@@ -17,10 +17,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.clubreservationcalendar.App
 import com.example.clubreservationcalendar.core.presentation.ImagePickerFactory
 import com.example.clubreservationcalendar.di.AppModule
+import io.github.aakira.napier.DebugAntilog
+import io.github.aakira.napier.Napier
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Napier.base(DebugAntilog())
+
         setContent {
             App(
                 darkTheme = isSystemInDarkTheme(),

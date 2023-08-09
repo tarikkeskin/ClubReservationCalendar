@@ -30,6 +30,7 @@ import com.example.clubreservationcalendar.contacts.domain.Contact
 import com.example.clubreservationcalendar.contacts.presentation.ContactListEvent
 import com.example.clubreservationcalendar.contacts.presentation.ContactListState
 import com.example.clubreservationcalendar.core.presentation.BottomSheetFromWish
+import com.example.clubreservationcalendar.ui.models.CustomEditTextField
 
 @Composable
 fun AddContactSheet(
@@ -86,7 +87,7 @@ fun AddContactSheet(
                     )
                 }
                 Spacer(Modifier.height(16.dp))
-                ContactTextField(
+                CustomEditTextField(
                     value = newContact?.firstName ?: "",
                     placeholder = "First name",
                     error = state.firstNameError,
@@ -96,7 +97,7 @@ fun AddContactSheet(
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(Modifier.height(16.dp))
-                ContactTextField(
+                CustomEditTextField(
                     value = newContact?.lastName ?: "",
                     placeholder = "Last name",
                     error = state.lastNameError,
@@ -106,7 +107,7 @@ fun AddContactSheet(
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(Modifier.height(16.dp))
-                ContactTextField(
+                CustomEditTextField(
                     value = newContact?.email ?: "",
                     placeholder = "Email",
                     error = state.emailError,
@@ -116,7 +117,7 @@ fun AddContactSheet(
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(Modifier.height(16.dp))
-                ContactTextField(
+                CustomEditTextField(
                     value = newContact?.phoneNumber ?: "",
                     placeholder = "Phone number",
                     error = state.phoneNumberError,
@@ -148,33 +149,7 @@ fun AddContactSheet(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun ContactTextField(
-    value: String,
-    placeholder: String,
-    error: String?,
-    onValueChanged: (String) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Column(modifier) {
-        OutlinedTextField(
-            value = value,
-            placeholder = {
-                Text(text = placeholder)
-            },
-            onValueChange = onValueChanged,
-            shape = RoundedCornerShape(20.dp),
-            modifier = Modifier.fillMaxWidth()
-        )
-        if(error != null) {
-            Text(
-                text = error,
-                color = MaterialTheme.colorScheme.error
-            )
-        }
-    }
-}
+
 
 
 

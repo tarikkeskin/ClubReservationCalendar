@@ -21,19 +21,20 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabDisposable
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import com.example.clubreservationcalendar.contacts.presentation.ContactListScreen
-import com.example.clubreservationcalendar.contacts.presentation.ContactListViewModel
-import com.example.clubreservationcalendar.core.presentation.ContactsTheme
 import com.example.clubreservationcalendar.core.presentation.ImagePicker
 import com.example.clubreservationcalendar.di.AppModule
-import dev.icerock.moko.mvvm.compose.getViewModel
-import dev.icerock.moko.mvvm.compose.viewModelFactory
 import com.example.clubreservationcalendar.basisTesting.BasisTesting
+import com.example.clubreservationcalendar.core.presentation.ContactsTheme
 import com.example.clubreservationcalendar.core.presentation.tabs.FavoritesTab
 import com.example.clubreservationcalendar.core.presentation.tabs.HomeTab
 import com.example.clubreservationcalendar.core.presentation.tabs.ProfileTab
 import com.example.clubreservationcalendar.datepickerTesting.DatePickerTesting
 import com.example.clubreservationcalendar.pagerTesting.PagerTesting
+import com.example.clubreservationcalendar.ui.screens.signInScreen.SignInScreen
+import com.example.clubreservationcalendar.ui.screens.signInScreen.SignInViewModel
+import dev.icerock.moko.mvvm.compose.getViewModel
+import dev.icerock.moko.mvvm.compose.viewModelFactory
+import io.github.aakira.napier.Napier
 
 @OptIn(ExperimentalVoyagerApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -43,30 +44,35 @@ fun App(
     appModule: AppModule,
     imagePicker: ImagePicker
 ) {
-    /*ContactsTheme(
+    ContactsTheme(
         darkTheme = darkTheme,
         dynamicColor = dynamicColor
     ) {
+
         val viewModel = getViewModel(
-            key = "contact-list-screen",
+            key = "sign-in-screen",
             factory = viewModelFactory {
-                ContactListViewModel(appModule.contactDataSource,appModule.authRepository)
+                SignInViewModel(appModule.authRepository)
             }
         )
         val state by viewModel.state.collectAsState()
+
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
-        ) {
-            ContactListScreen(
+        ){
+            SignInScreen(
                 state = state,
-                newContact = viewModel.newContact,
-                authRepository = appModule.authRepository,
-                onEvent = viewModel::onEvent,
-                imagePicker = imagePicker
+                onEvent = viewModel::onEvent
             )
         }
-    }*/
+    }
+    //ContentA()
+}
+
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalVoyagerApi::class)
+@Composable
+fun ContentA() {
     TabNavigator(
         HomeTab(),
         tabDisposable = {
@@ -95,38 +101,6 @@ fun App(
         )
     }
 }
-
-/*@OptIn(ExperimentalMaterial3Api::class, ExperimentalVoyagerApi::class)
-@Composable
-fun Content() {
-    TabNavigator(
-        HomeTab,
-        tabDisposable = {
-            TabDisposable(
-                navigator = it,
-                tabs = listOf(HomeTab, FavoritesTab, ProfileTab)
-            )
-        }
-    ) { tabNavigator ->
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = { Text(text = tabNavigator.current.options.title) }
-                )
-            },
-            content = {
-                CurrentTab()
-            },
-            bottomBar = {
-                BottomNavigation {
-                    TabNavigationItem(HomeTab)
-                    TabNavigationItem(FavoritesTab)
-                    TabNavigationItem(ProfileTab)
-                }
-            }
-        )
-    }
-}*/
 
 @Composable
 internal fun RowScope.TabNavigationItem(tab: Tab) {

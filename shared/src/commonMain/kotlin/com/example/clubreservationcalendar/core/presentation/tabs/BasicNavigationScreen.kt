@@ -82,10 +82,10 @@ data class BasicNavigationScreen(
                 Spacer(modifier = Modifier.weight(.1f))
 
                 Button(
-                    //onClick = { navigator.push(BasicNavigationScreen(index.inc(), wrapContent)) },
-                    onClick = {
+                    onClick = { navigator.push(BasicNavigationScreen(index.inc(), wrapContent)) },
+                    /*onClick = {
                             screenModel.addReservation("firstComment")
-                    },
+                    },*/
                     modifier = Modifier.weight(.5f)
                 ) {
                     Text(text = "Push")
@@ -94,7 +94,8 @@ data class BasicNavigationScreen(
                 Spacer(modifier = Modifier.weight(.1f))
 
                 Button(
-                    onClick = { navigator.replace(BasicNavigationScreen(index.inc(), wrapContent)) },
+                    onClick = {
+                        navigator.replace(BasicNavigationScreen(index.inc(), wrapContent)) },
                     modifier = Modifier.weight(.5f)
                 ) {
                     Text(text = "Replace")

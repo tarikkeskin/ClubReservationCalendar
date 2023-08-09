@@ -26,6 +26,6 @@ internal class FavoritesTab : Tab {
 
     @Composable
     override fun Content() {
-        TabContent()
+        CalendarTabContent()
     }
 }

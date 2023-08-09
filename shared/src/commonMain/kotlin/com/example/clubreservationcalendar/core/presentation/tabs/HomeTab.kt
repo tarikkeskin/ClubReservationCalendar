@@ -26,6 +26,6 @@ internal class HomeTab : Tab {
 
     @Composable
     override fun Content() {
-        TabContent()
+        HomeTabContent()
     }
 }

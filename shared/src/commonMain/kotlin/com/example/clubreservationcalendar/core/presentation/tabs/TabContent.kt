@@ -17,11 +17,50 @@ import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.transitions.SlideTransition
 import io.github.aakira.napier.Napier
-import cafe.adriel.voyager.navigator.tab.TabNavigator
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun Tab.TabContent() {
+fun Tab.HomeTabContent() {
+    val tabTitle = options.title
+
+    LifecycleEffect(
+        onStarted = { Napier.d("Navigator", tag = "Start tab $tabTitle") },
+        onDisposed = { Napier.d("Navigator", tag = "Dispose tab $tabTitle") },
+    )
+
+    Navigator(BasicNavigationScreen(index = 0)) { navigator ->
+        SlideTransition(navigator) { screen ->
+            Column {
+                InnerTabNavigation()
+                screen.Content()
+                Napier.d("Navigator", tag = "Last Event: ${navigator.lastEvent}")
+            }
+        }
+    }
+}
+@OptIn(ExperimentalAnimationApi::class)
+@Composable
+fun Tab.CalendarTabContent() {
+    val tabTitle = options.title
+
+    LifecycleEffect(
+        onStarted = { Napier.d("Navigator", tag = "Start tab $tabTitle") },
+        onDisposed = { Napier.d("Navigator", tag = "Dispose tab $tabTitle") },
+    )
+
+    Navigator(BasicNavigationScreen(index = 0)) { navigator ->
+        SlideTransition(navigator) { screen ->
+            Column {
+                InnerTabNavigation()
+                screen.Content()
+                Napier.d("Navigator", tag = "Last Event: ${navigator.lastEvent}")
+            }
+        }
+    }
+}
+@OptIn(ExperimentalAnimationApi::class)
+@Composable
+fun Tab.ProfileTabContent() {
     val tabTitle = options.title
 
     LifecycleEffect(

@@ -26,6 +26,6 @@ internal class ProfileTab : Tab {
 
     @Composable
     override fun Content() {
-        TabContent()
+        ProfileTabContent()
     }
 }

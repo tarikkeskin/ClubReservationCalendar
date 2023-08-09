@@ -34,7 +34,6 @@ import com.example.clubreservationcalendar.core.presentation.ImagePicker
 fun ContactListScreen(
     state: ContactListState,
     newContact: Contact?,
-    authRepository: AuthRepository,
     onEvent: (ContactListEvent) -> Unit,
     imagePicker: ImagePicker
 ) {
@@ -96,6 +95,7 @@ fun ContactListScreen(
         }
 
     }
+
 
     ContactDetailSheet(
         isOpen = state.isSelectedContactSheetOpen,
