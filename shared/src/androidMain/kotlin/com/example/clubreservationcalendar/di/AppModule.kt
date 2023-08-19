@@ -26,4 +26,6 @@ actual class AppModule(
 
     actual val reservationRepository: ReservationRepository
         get() = ReservationRepository()
+    actual val imageStorage: ImageStorage
+        get() = TODO("Not yet implemented")
 }

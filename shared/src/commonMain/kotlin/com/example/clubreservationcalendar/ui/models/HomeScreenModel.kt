@@ -22,18 +22,18 @@ class HomeScreenModel (
         data class Result(val reservationList: List<Reservation>) : State()
     }
 
-    val currentUser: FirebaseUser? get() = authRepository.currentUser
+    /*val currentUser: FirebaseUser? get() = authRepository.currentUser*/
     private val _loginFlow = MutableStateFlow<Resource<FirebaseUser>?>(null)
     val loginFlow: StateFlow<Resource<FirebaseUser>?> = _loginFlow
 
     private val _reservation = MutableStateFlow<Resource<Boolean>?>(null)
     val reservation: StateFlow<Resource<Boolean>?> = _reservation
 
-    init {
+    /*init {
         if (authRepository.currentUser != null) {
             _loginFlow.value = Resource.Success(authRepository.currentUser)
         }
-    }
+    }*/
 
     fun addReservation(
         comment: String,

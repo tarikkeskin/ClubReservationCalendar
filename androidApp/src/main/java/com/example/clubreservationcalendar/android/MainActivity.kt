@@ -12,11 +12,14 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.clubreservationcalendar.App
 import com.example.clubreservationcalendar.core.presentation.ImagePickerFactory
 import com.example.clubreservationcalendar.di.AppModule
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 
@@ -26,20 +29,23 @@ class MainActivity : ComponentActivity() {
 
         Napier.base(DebugAntilog())
 
+        Firebase.storage
         setContent {
+
             App(
                 darkTheme = isSystemInDarkTheme(),
                 dynamicColor = true,
                 appModule = AppModule(LocalContext.current.applicationContext),
                 imagePicker = ImagePickerFactory().createPicker()
             )
+
         }
     }
 }
 
 @Composable
 fun GreetingView(text: String) {
-    Text(text = text)
+    Text(text = text, color = Color.Black)
 }
 
 @Preview

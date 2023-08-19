@@ -7,6 +7,7 @@ import com.example.clubreservationcalendar.core.api.ReservationRepository
 import com.example.clubreservationcalendar.core.data.DatabaseDriverFactory
 import com.example.clubreservationcalendar.core.data.ImageStorage
 import com.example.clubreservationcalendar.database.ContactDatabase
+import platform.Foundation.NSData
 
 actual class AppModule {
 
@@ -23,4 +24,7 @@ actual class AppModule {
 
     actual val reservationRepository: ReservationRepository
         get() = ReservationRepository()
+
+    actual val imageStorage: ImageStorage
+        get() = ImageStorage()
 }

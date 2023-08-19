@@ -14,7 +14,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
@@ -30,11 +32,19 @@ import com.example.clubreservationcalendar.core.presentation.tabs.HomeTab
 import com.example.clubreservationcalendar.core.presentation.tabs.ProfileTab
 import com.example.clubreservationcalendar.datepickerTesting.DatePickerTesting
 import com.example.clubreservationcalendar.pagerTesting.PagerTesting
+import com.example.clubreservationcalendar.ui.screens.signInScreen.SignInEvent
 import com.example.clubreservationcalendar.ui.screens.signInScreen.SignInScreen
 import com.example.clubreservationcalendar.ui.screens.signInScreen.SignInViewModel
 import dev.icerock.moko.mvvm.compose.getViewModel
 import dev.icerock.moko.mvvm.compose.viewModelFactory
 import io.github.aakira.napier.Napier
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import androidx.compose.material3.Button
+import com.example.clubreservationcalendar.contacts.presentation.ContactListScreen
+import com.example.clubreservationcalendar.contacts.presentation.ContactListViewModel
+import dev.gitlive.firebase.Firebase
 
 @OptIn(ExperimentalVoyagerApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -42,30 +52,48 @@ fun App(
     darkTheme: Boolean,
     dynamicColor: Boolean,
     appModule: AppModule,
-    imagePicker: ImagePicker
+    imagePicker: ImagePicker,
 ) {
     ContactsTheme(
         darkTheme = darkTheme,
         dynamicColor = dynamicColor
     ) {
-
         val viewModel = getViewModel(
-            key = "sign-in-screen",
+            key = "contact-list-screen",
             factory = viewModelFactory {
-                SignInViewModel(appModule.authRepository)
+                ContactListViewModel(appModule.contactDataSource,appModule.authRepository,appModule.reservationRepository)
             }
         )
         val state by viewModel.state.collectAsState()
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            ContactListScreen(
+                state = state,
+                newContact = viewModel.newContact,
+                onEvent = viewModel::onEvent,
+                imagePicker = imagePicker
+            )
+        }
+
+        /*val coroutineScope = rememberCoroutineScope()
+
+
+        coroutineScope.launch{
+            Napier.d(appModule.authRepository.isLoggedIn().toString(), tag = "Debug->")
+            Napier.d(string, tag = "Debug->")
+            //appModule.authRepository.signOut()
+            //appModule.authRepository.delete()
+        }
 
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ){
-            SignInScreen(
-                state = state,
-                onEvent = viewModel::onEvent
-            )
+            SignInScreen(appModule.authRepository)
         }
+*/
     }
     //ContentA()
 }

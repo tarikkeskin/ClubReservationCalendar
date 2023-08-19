@@ -47,7 +47,7 @@ class SignInViewModel(
                 )
                 if(errors.isEmpty()) {
                     viewModelScope.launch {
-                        when(val resource = authRepository.signIn(state.value.email!!,state.value.email!!)){
+                        when(val resource = authRepository.signIn(state.value.email!!,state.value.password!!)){
                             is Resource.Success -> {
                                 _state.update {
                                     it.copy(
@@ -56,8 +56,6 @@ class SignInViewModel(
                                         passwordError = null,
                                     )
                                 }
-                                // TODO: Navigate to HomePage
-
                             }
                             is Resource.Failure ->{
                                 _state.update {

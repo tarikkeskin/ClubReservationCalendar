@@ -8,7 +8,6 @@ import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.Flow
 
 class AuthRepository {
-    val currentUser: FirebaseUser? = null
     private val firebaseAuth: FirebaseAuth by lazy { Firebase.auth }
 
     suspend fun signUp(email: String, password: String): Resource<FirebaseUser> {
@@ -37,15 +36,15 @@ class AuthRepository {
         return Firebase.auth.signOut()
     }
 
-    suspend fun isLoggedIn(): Boolean {
+    fun isLoggedIn(): Boolean {
         return Firebase.auth.currentUser != null
     }
 
-    suspend fun getCurrentUser(): FirebaseUser? {
+     fun getCurrentUser(): FirebaseUser? {
         return Firebase.auth.currentUser
     }
 
-    suspend fun authStateChanged(): Flow<FirebaseUser?> {
+    fun authStateChanged(): Flow<FirebaseUser?> {
         return Firebase.auth.authStateChanged
     }
 

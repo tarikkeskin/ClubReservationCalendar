@@ -131,7 +131,20 @@ class ContactListViewModel(
 
                     if(errors.isEmpty()) {
 
+                        _state.update { it.copy(
+                            isAddContactSheetOpen = false,
+                            firstNameError = null,
+                            lastNameError = null,
+                            emailError = null,
+                            phoneNumberError = null
+                        ) }
                         viewModelScope.launch {
+                            contactDataSource.insertContact(contact)
+                            delay(300L) // Animation delay
+                            newContact = null
+                        }
+
+                        /*viewModelScope.launch {
                             //contactDataSource.insertContact(contact)
 
                             when(val resource = authRepository.signIn(contact.email,contact.firstName)){
@@ -167,7 +180,7 @@ class ContactListViewModel(
                             }
                             delay(300L) // Animation delay
                             newContact = null
-                        }
+                        }*/
                     } else {
                         _state.update { it.copy(
                             firstNameError = result.firstNameError,

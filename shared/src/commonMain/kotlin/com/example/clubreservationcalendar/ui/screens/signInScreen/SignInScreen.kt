@@ -10,24 +10,42 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.clubreservationcalendar.core.api.AuthRepository
 import com.example.clubreservationcalendar.ui.models.CustomEditTextField
+import dev.icerock.moko.mvvm.compose.getViewModel
+import dev.icerock.moko.mvvm.compose.viewModelFactory
 import io.github.aakira.napier.Napier
+import kotlinx.coroutines.launch
 
 
 @Composable
 fun SignInScreen(
-    state: SignInState,
-    onEvent: (SignInEvent) -> Unit,
+    authRepository: AuthRepository
 ) {
 
-    if (state.currentUser != null){ // Main Screen
+    val coroutineScope = rememberCoroutineScope()
+
+    val viewModel = getViewModel(
+        key = "sign-in-screen",
+        factory = viewModelFactory {
+            SignInViewModel(authRepository)
+        }
+    )
+    val state by viewModel.state.collectAsState()
+
+    if (authRepository.isLoggedIn()){ // Main Screen
         Napier.d("Main Screen", tag = "Debug->")
         Button(
             onClick = {
-                onEvent(SignInEvent.SignInWithoutUserButtonPressed)
+                coroutineScope.launch {
+                    //authRepository.delete()
+                }
             }
         ) {
             Text(text = "Misafir olarak giriş yap")
@@ -52,7 +70,7 @@ fun SignInScreen(
                     placeholder = "E-mail",
                     error = state.emailError,
                     onValueChanged = {
-                        onEvent(SignInEvent.OnEmailChanged(it))
+                        viewModel.onEvent(SignInEvent.OnEmailChanged(it))
                     },
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -64,7 +82,7 @@ fun SignInScreen(
                     placeholder = "Şifre",
                     error = state.passwordError,
                     onValueChanged = {
-                        onEvent(SignInEvent.OnPasswordChanged(it))
+                        viewModel.onEvent(SignInEvent.OnPasswordChanged(it))
                     },
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -73,7 +91,7 @@ fun SignInScreen(
 
                 Button(
                     onClick = {
-                        onEvent(SignInEvent.SignInButtonPressed)
+                        viewModel.onEvent(SignInEvent.SignInButtonPressed)
                     }
                 ) {
                     Text(text = "Giriş Yap")
@@ -83,7 +101,7 @@ fun SignInScreen(
 
                 Button(
                     onClick = {
-                        onEvent(SignInEvent.SignInWithoutUserButtonPressed)
+                        viewModel.onEvent(SignInEvent.SignInWithoutUserButtonPressed)
                     }
                 ) {
                     Text(text = "Misafir olarak giriş yap")
